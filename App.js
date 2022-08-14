@@ -13,6 +13,8 @@ import store from './store/store';
 import AuthNavigator from "./navigators/AuthNavigator";
 import { styles } from './styles';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

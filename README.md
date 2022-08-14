@@ -1,3 +1,3 @@
 # UniMarket-Client
 
-Authors: Kevin Ng, Brian Kim, Lisa 
+Authors: Kevin Ng, Brian Kim, Lisa Song
