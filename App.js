@@ -1,26 +1,42 @@
 import * as SplashScreen from "expo-splash-screen";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { useCallback, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import BottomNav from "./headers/BottomNav.js";
+import * as SecureStore from 'expo-secure-store';
 
+import Landing from './appRoutes/Landing';
+import BottomNavigator from "./navigators/BottomNavigator";
 import store from './store/store';
-import GoogleLogin from './components/Login/GoogleLogin';
+import AuthNavigator from "./navigators/AuthNavigator";
+import { styles } from './styles';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  useEffect(() => {
-    async function prepare() {
-      //API calls go here 
-      setAppIsReady(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  async function prepare() {
+    checkLoginStatus();
+    setAppIsReady(true);
+  }
+  async function checkLoginStatus(){
+    const credential = await SecureStore.getItemAsync('loginStatus');
+    if(credential){
+      setLoginStatus(credential);
     }
-    prepare();
-  }, []);
+  }
+
+  useEffect(() => {
+    if(!appIsReady){
+      prepare();
+      setTimeout(()=>setIsLoading(false), 1500);
+    }
+  }, [appIsReady]);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
@@ -40,21 +56,23 @@ export default function App() {
   return (
     <Provider store={store}>
         <StatusBar style="auto" animated={true} />
-        <NavigationContainer onReady={onLayoutRootView}>
+        <NavigationContainer theme={styles} >
           <SafeAreaProvider>
-            {/* <GoogleLogin /> */}
-            <BottomNav/>
+            {isLoading ? (
+                <View 
+                  onLayout={onLayoutRootView}
+                  style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <Landing />
+                </View>
+              ) : loginStatus ? (
+                <BottomNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
+              ) : (
+                <AuthNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
+              )
+            }
           </SafeAreaProvider>
         </NavigationContainer>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

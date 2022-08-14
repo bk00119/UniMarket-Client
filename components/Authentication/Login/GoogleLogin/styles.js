@@ -6,7 +6,6 @@ export const styles = {
         backgroundColor: '#D0E2FF'
     },
     mobileLoginButton: {
-        // backgroundColor: "#4C8BF5",
         backgroundColor: '#fff',
         display: 'flex',
         justifyContent: 'center',
@@ -20,7 +19,6 @@ export const styles = {
     },
     mobileLoginButtonText: {
         fontSize: 20,
-        // color: "#fff",
         color: 'black',
         alignSelf: "center",
     }
