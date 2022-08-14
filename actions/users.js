@@ -19,12 +19,3 @@ export const getUserByGoogleId = (goog_id) => async(dispatch) => {
         console.log(error);
     }
 }
-
-export const userLogout = () => async(dispatch) => {
-    try {
-        console.log("logout");
-        dispatch({ type: "LOGOUT" , payload: [] });
-    } catch(error) {
-        console.log(error);
-    }
-}
