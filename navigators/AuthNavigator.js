@@ -1,20 +1,22 @@
 import { createStackNavigator  } from "@react-navigation/stack";
 import { useState, useEffect } from 'react';
 import { Button, Text } from '@rneui/themed';
+import { Platform } from 'react-native'; //REMOVE THIS LATER
 
 import GoogleLogin from '../components/Authentication/Login/GoogleLogin';
 import UserRegister from "../components/Authentication/UserRegister";
 
 export default function AuthNavigator(props) {
     const Stack = createStackNavigator();
-    const [userDataLoaded, setUserDataLoaded] = useState(null);
-    const [registerStatus, setRegisterStatus] = useState(false);
+    const [userData, setUserData] = useState(null);
+    const [registerStatus, setRegisterStatus] = useState(false); //CHANGE BACK TO THIS
+    // const [registerStatus, setRegisterStatus] = Platform.OS==='ios' ? useState(false) : useState(true);
     
     let authProps = {
         loginStatus: props.loginStatus,
         setLoginStatus: props.setLoginStatus,
-        userDataLoaded: userDataLoaded,
-        setUserDataLoaded: setUserDataLoaded,
+        userData: userData,
+        setUserData: setUserData,
         registerStatus: registerStatus,
         setRegisterStatus: setRegisterStatus
     }

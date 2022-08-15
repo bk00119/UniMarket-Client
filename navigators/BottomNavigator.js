@@ -27,7 +27,7 @@ export default function BottomNavigator(props) {
         name="Post"
         component={PostScreen}
       />
-        <Tab.Screen
+      <Tab.Screen
         name="Chat"
         component={ChatScreen}
       />
