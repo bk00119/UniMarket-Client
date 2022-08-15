@@ -4,7 +4,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { Button, Image } from "@rneui/themed";
 
-import * as api from '../../../../api';
+import * as api from '../../../../api/users';
 import { styles } from "./styles";
 import { Switch } from 'react-native-gesture-handler';
 

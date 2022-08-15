@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native'
 
-function PostScreen(props) {
+export default function SellItemScreen(props) {
     return (
         <View  style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
             <Text>PostScreen</Text>
@@ -15,5 +15,3 @@ function PostScreen(props) {
         </View>
     );
 }
-
-export default PostScreen;

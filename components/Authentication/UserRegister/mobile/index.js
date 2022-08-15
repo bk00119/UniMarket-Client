@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as SecureStore from 'expo-secure-store';
 
-import * as api from '../../../../api';
+import * as api from '../../../../api/users';
 import { styles } from "./styles";
 
 export default function MobileUserRegister(props){

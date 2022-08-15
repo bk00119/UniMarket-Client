@@ -7,10 +7,10 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SecureStore from 'expo-secure-store';
 
-import Landing from './appRoutes/Landing';
-import BottomNavigator from "./navigators/BottomNavigator";
+import Landing from './routes/appRoutes/Landing';
+import BottomNavigator from './routes/BottomNavigator';
+import AuthRoutes from './routes/AuthRoutes';
 import store from './store/store';
-import AuthNavigator from "./navigators/AuthNavigator";
 import { theme } from './theme';
 
 SplashScreen.preventAutoHideAsync();
@@ -68,7 +68,7 @@ export default function App() {
               ) : loginStatus ? (
                 <BottomNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
               ) : (
-                <AuthNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
+                <AuthRoutes loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
               )
             }
           </SafeAreaProvider>

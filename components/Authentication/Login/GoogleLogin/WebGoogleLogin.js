@@ -4,7 +4,7 @@ import { Button, View, Text } from 'react-native';
 import { useSelector , useDispatch } from 'react-redux';
 import * as WebBrowser from 'expo-web-browser';
 
-import * as api from '../../../../api';
+// import * as api from '../../../../api';
 
 WebBrowser.maybeCompleteAuthSession();
 

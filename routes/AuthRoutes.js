@@ -6,7 +6,7 @@ import { Platform } from 'react-native'; //REMOVE THIS LATER
 import GoogleLogin from '../components/Authentication/Login/GoogleLogin';
 import UserRegister from "../components/Authentication/UserRegister";
 
-export default function AuthNavigator(props) {
+export default function AuthRoutes(props) {
     const Stack = createStackNavigator();
     const [userData, setUserData] = useState(null);
     const [registerStatus, setRegisterStatus] = useState(false); //CHANGE BACK TO THIS
