@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {View, Text} from 'react-native'
 import * as SecureStore from 'expo-secure-store';
 
-import GoogleLogin from '../../components/Authentication/Login/GoogleLogin';
+import GoogleLogin from '../../../components/Authentication/Login/GoogleLogin';
 
 function ProfileScreen(props) {
     const [userId, setUserId] = useState(null);
