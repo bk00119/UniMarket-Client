@@ -1,10 +1,12 @@
-import React from 'react';
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 
-export default function HomeScreen(props) {
+import ItemResult from '../../../components/Item/ItemResult/mobile';
+import { styles } from './styles';
+
+export default function HomeScreen() {
     return (
-        <View>
-            <Text>HomeScreen</Text>
+        <View style={styles.homeScreenContainer}>
+            <ItemResult />
         </View>
     );
 }

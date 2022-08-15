@@ -1,11 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, Button } from "react-native";
+import { Text, Button, View } from "react-native";
 
 import HomeScreen from "./appRoutes/Home/HomeScreen";
 import CategoriesScreen from "./appRoutes/Categories/CategoriesScreen";
 import SellItemScreen from "./appRoutes/SellItem/SellItemScreen";
 import ChatScreen from "./appRoutes/Chat/ChatScreen";
 import ProfileScreen from "./appRoutes/Profile/ProfileScreen";
+import SearchAndNotification from "../components/Headers/right/SearchAndNotification/mobile";
+import NotificationAndSettings from "../components/Headers/right/NotificationAndSettings/mobile";
+import Options from "../components/Headers/right/Options/mobile";
 
 export default function BottomNavigator(props) {
   const Tab = createBottomTabNavigator();
@@ -13,7 +16,7 @@ export default function BottomNavigator(props) {
   return (
     <Tab.Navigator
       backBehavior="history"
-      initialRouteName="Profile" //CHANGE THIS LATER
+      initialRouteName="Home" //CHANGE THIS LATER
       screenOptions={{
         headerStyle: {
           shadowRadius: 0,
@@ -22,8 +25,8 @@ export default function BottomNavigator(props) {
           }
         },
         headerTitleStyle: {
-          fontSize: 25,
-          marginLeft: 10
+          fontSize: 28,
+          marginLeft: 10,
         },
         headerTitleAlign: 'left'
       }}
@@ -32,31 +35,41 @@ export default function BottomNavigator(props) {
         name="Home"
         component={HomeScreen}
         options={{
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() => setRegisterStatus(false)}
-          //     title="Back"
-          //     buttonStyle={{backgroundColor:'#FFF', marginLeft: 10}}
-          //     titleStyle={{color: '#000'}}
-          //   />
-          // ),
+          headerRight: () => (
+            <SearchAndNotification />
+          ),
         }}
       />
       <Tab.Screen
         name="Categories"
         component={CategoriesScreen}
+        options={{
+          headerRight: () => (
+            <SearchAndNotification />
+          ),
+        }}
       />
       <Tab.Screen
-        name="Post"
+        name="Sell"
         component={SellItemScreen}
       />
       <Tab.Screen
         name="Chat"
         component={ChatScreen}
+        options={{
+          headerRight: () => (
+            <Options />
+          ),
+        }}
       />
       <Tab.Screen
-        name="Profile"
+        name="My"
         children={()=><ProfileScreen loginStatus={props.loginStatus} setLoginStatus={props.setLoginStatus}/>}
+        options={{
+          headerRight: () => (
+            <NotificationAndSettings />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
