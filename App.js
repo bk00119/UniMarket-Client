@@ -11,7 +11,7 @@ import Landing from './appRoutes/Landing';
 import BottomNavigator from "./navigators/BottomNavigator";
 import store from './store/store';
 import AuthNavigator from "./navigators/AuthNavigator";
-import { styles } from './styles';
+import { theme } from './theme';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -56,7 +56,7 @@ export default function App() {
   return (
     <Provider store={store}>
         <StatusBar style="auto" animated={true} />
-        <NavigationContainer theme={styles} >
+        <NavigationContainer theme={theme} >
           <SafeAreaProvider>
             {isLoading ? (
                 <View 

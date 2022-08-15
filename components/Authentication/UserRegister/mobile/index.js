@@ -1,21 +1,39 @@
 import { Text } from 'react-native';
 import { Input, Button } from '@rneui/themed';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as SecureStore from 'expo-secure-store';
 
+import * as api from '../../../../api';
 import { styles } from "./styles";
 
 export default function MobileUserRegister(props){
     const [nickname, setNickame] = useState(null);
 
-    useEffect(()=> {
+    async function registerUserToDB(){
         if(nickname==null){
-            console.log("NICKNAME IS REQUIRED");
+            alert("Please type your nickname");
+            return;
         }
-    },[nickname])
-    function register(){
-        console.log(nickname);
+        try { 
+            await api.createUser(props.userData)
+                .then(async (response) => {
+                    await SecureStore.setItemAsync('loginStatus', response.data._id);
+                    props.setRegisterStatus(false);
+                    props.setLoginStatus(true);
+                })
+        } catch (error) {
+            if(error.response.status == 409) {
+                console.log("ERROR: CAN'T CREATE A NEW USER");
+            }
+        }
     }
+
+    function register(){
+        props.userData.userName = nickname;
+        registerUserToDB();
+    }
+
     return (
         <SafeAreaView style={styles.mobileUserRegisterContainer}>
             <Text style={styles.mobileUserRegisterTitle}>Set Up Your Nickname</Text>
