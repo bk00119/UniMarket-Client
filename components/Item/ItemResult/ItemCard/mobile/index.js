@@ -10,7 +10,7 @@ export default function ItemCard(props){
     return (
         <View style={styles.itemCardContainer}>
             <ItemCardImage imageSrc={props.imageSrc} />
-            <View style={styles.itemCardInfoContainer}>
+            <View style={styles.itemCardInfoContainer} >
                 <Text numberOfLines={1} style={styles.itemCardTitle}>{props.title}</Text>
                 <Text numberOfLines={1} style={styles.itemCardCost}>{props.cost}</Text>
                 <View style={styles.itemCardDetailContainer}>

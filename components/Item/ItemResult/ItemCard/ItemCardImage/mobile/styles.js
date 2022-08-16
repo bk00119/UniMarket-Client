@@ -1,6 +1,6 @@
 export const styles = {
     ItemCardImageContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'lightgray',
         width: '100%',
         height: 200,
         borderRadius: 10

@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, Button, View } from "react-native";
 
 import HomeScreen from "./appRoutes/Home/HomeScreen";
 import CategoriesScreen from "./appRoutes/Categories/CategoriesScreen";
@@ -16,7 +15,7 @@ export default function BottomNavigator(props) {
   return (
     <Tab.Navigator
       backBehavior="history"
-      initialRouteName="Home" //CHANGE THIS LATER
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {
           shadowRadius: 0,

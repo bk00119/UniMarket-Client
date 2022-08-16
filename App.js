@@ -9,6 +9,7 @@ import * as SecureStore from 'expo-secure-store';
 
 import Landing from './routes/appRoutes/Landing';
 import BottomNavigator from './routes/BottomNavigator';
+import AppStack from "./routes/appRoutes/AppStack";
 import AuthRoutes from './routes/AuthRoutes';
 import store from './store/store';
 import { theme } from './theme';
@@ -66,7 +67,8 @@ export default function App() {
                   <Landing />
                 </View>
               ) : loginStatus ? (
-                <BottomNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
+                // <BottomNavigator loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
+                <AppStack loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
               ) : (
                 <AuthRoutes loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
               )

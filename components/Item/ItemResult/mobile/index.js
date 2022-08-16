@@ -1,46 +1,60 @@
-import { View } from 'react-native';
-import { Button } from '@rneui/themed';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
+import ItemResultHomeHeader from '../ItemResultHeaders/ItemResultHomeHeader/mobile';
+import ItemResultCategoriesHeader from '../ItemResultHeaders/ItemResultCategoriesHeader/mobile';
 import ItemCard from '../ItemCard/mobile';
 import { styles } from './styles';
 
 export default function ItemResult(props){
+    const navigation = useNavigation();
     const [selection, setSelection] = useState(0);
-    // const [itemList, setItemList] = useState([]);
+    // const [itemList, setItemList] = useState([]); //with API Request
     const [itemList, setItemList] = useState([
         {
+            "_id": "1",
             "title": "ECON-UA 323 TEXTBOOK",
-            "imageSrc": "",
-            "cost": "$36",
+            "images": [],
+            "cost": 3600, //--> $36.00
             "location": "Palladium Hall",
-            "uploadTime": "5 hours ago"
+            "uploadTime": "5 hours ago",
+            "category": "Books",
+            "tags": ["Econ", "textbook", "intro"],
+            "description": "Spelling my Econ textbook (Economics principles & practices) for ECON-UA 323 class (prof.Johnson).\n\nIt is in very good condition, no marks, stains, or whatsoever. Get it at a much cheaper price!! The original price is $80 on Amazon (insane!!)",
+            "counts": {
+                "view": 280,
+                "favorites": 39
+            }
         },
         {
+            "_id": "2",
             "title": "IKEA Mini Fridge",
-            "imageSrc": "",
+            "images": [],
             "cost": "$80",
             "location": "Weinstein Hall",
             "uploadTime": "2 days ago"
         },
         {
+            "_id": "3",
             "title": "NYU Leggings",
-            "imageSrc": "",
+            "images": [],
             "cost": "$20",
             "location": "Bobst Library",
             "uploadTime": "1 week ago"
         },
         {
+            "_id": "4",
             "title": "Jacquemus Hat",
-            "imageSrc": "",
+            "images": [],
             "cost": "$75",
             "location": "University Hall",
             "uploadTime": "2 hours ago"
         },
         {
+            "_id": "5",
             "title": "Hodu's Favorite Toy",
-            "imageSrc": "",
+            "images": [],
             "cost": "$100,000",
             "location": "Tandon",
             "uploadTime": "5 minutes ago"
@@ -51,38 +65,26 @@ export default function ItemResult(props){
         // API Request for Item Results
     },[selection]);
 
+    function itemScreenNavigate(item_id){
+        navigation.navigate("ItemScreen", {
+            item_id: item_id
+        });
+    }
+
     return(
         <View style={styles.itemResultContainer}>
-            <View style={styles.itemResultHeaderContainer}>
-                <View style={styles.itemResultHeaderSelectionContainer}>
-                    <Button
-                        title="All"
-                        buttonStyle={selection == 0 ? styles.itemResultSelectionButtonUnderlined : styles.itemResultHeaderSelectionButton}
-                        titleStyle={styles.homeScreenSelectionButtonTitle}
-                        onPress={()=>setSelection(0)}
-                    />
-                    <Button
-                        title="Recommended"
-                        buttonStyle={selection == 1 ? styles.itemResultSelectionButtonUnderlined : styles.itemResultHeaderSelectionButton}
-                        titleStyle={styles.homeScreenSelectionButtonTitle}
-                        onPress={()=>setSelection(1)}
-                    />
-                    <Button
-                        title="Trending"
-                        buttonStyle={selection == 2 ? styles.itemResultSelectionButtonUnderlined : styles.itemResultHeaderSelectionButton}
-                        titleStyle={styles.homeScreenSelectionButtonTitle}
-                        onPress={()=>setSelection(2)}
-                    />
-                </View>
-                <Ionicons style={styles.itemResultFilterButton}name="filter-outline" size={32} color="black" onPress={()=>console.log('SHOW FILTER')} />
-            </View>
-            <View style={styles.itemResultItemCardsContainer}>
+            { props.itemResultHeaderType === 'home' ? (
+                <ItemResultHomeHeader selection={selection} setSelection={setSelection} />
+            ) : (
+                <ItemResultCategoriesHeader category={props.category} setCategory={props.setCategory} />
+            )}
+            <ScrollView contentContainerStyle={styles.itemResultItemCardsContainer}>
                 { itemList.map((item, index)=> (
-                    <View style={styles.itemResultItemCardContainer}>
+                    <TouchableOpacity style={styles.itemResultItemCardContainer} onPress={()=>itemScreenNavigate(item._id)} >
                         <ItemCard key={index} {...item} />
-                    </View>
+                    </TouchableOpacity>
                 ))}
-            </View>
+            </ScrollView>
         </View>
     );
 }

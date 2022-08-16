@@ -6,7 +6,7 @@ import { styles } from './styles';
 export default function HomeScreen() {
     return (
         <View style={styles.homeScreenContainer}>
-            <ItemResult />
+            <ItemResult itemResultHeaderType='home' />
         </View>
     );
 }
