@@ -1,0 +1,53 @@
+//TEST...REMOVE THIS
+    const [item, setItem] = useState({
+        "sellerId: ": "62f9a489866d672853725d4d",
+        "title": "MATH-UA 323 TEXTBOOK",
+        "images": [
+            "https://dawnquarles.weebly.com/uploads/6/8/1/5/68158207/editor/textbook-cover_1.jpg?1532825260",
+            "https://images-na.ssl-images-amazon.com/images/I/51AH81589KL.jpg",
+            "https://pictures.abebooks.com/isbn/9780131815445-us.jpg"
+        ],
+        "originalCost": "3600",
+        "cost": "3600",
+        "location": [
+            "Palladium Hall"
+        ],
+        "uploadTime": "2022-08-16T05:11:29.163Z",
+        "category": "Books",
+        "tags": [
+            "#Econ",
+            "#textbook",
+            "#intro"
+        ],
+        "description": "Selling my Econ textbook (Economics principles & practices) for ECON-UA 323 class (prof.Johnson).\n\nIt is in very good condition, no marks, stains, or whatsoever. Get it at a much cheaper price!! The original price is $80 on Amazon (insane!!)",
+        "counts": {
+            "view": "280",
+            "favorites": "39"
+        },
+        "chats": null
+    });
+    const [login, setLogin] = useState(null);
+    async function getLoginStatus(){
+        const log = await SecureStore.getItemAsync('loginStatus');
+        setLogin(log);
+    }
+    useEffect(()=>{
+        if(login==null){
+            getLoginStatus();
+        }
+        // console.log(login);
+        if(item!=null && login!=null){
+            try {
+                // item.sellerId = login;
+                api.createItem(item)
+                    .then(async (response)=> {
+                        setItem(null);
+                        console.log(item);
+                    })
+            } catch (error) {
+                if(error.response.status == 409){
+                    console.log("ERROR");
+                }
+            }
+        }
+    },[login])

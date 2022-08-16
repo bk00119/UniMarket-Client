@@ -3,7 +3,8 @@ export const styles = {
         width: '100%',
         marginHorizontal: 5,
         marginVertical: 5,
-        paddingRight: 10,
+        flex: 1,
+        borderRadius: 10
     },
     itemCardTitle: {
         fontSize: 18,

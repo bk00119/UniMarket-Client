@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Furniture",
+        "imageSrc": ""
+    },
+    {
+        "name": "Fashion",
+        "imageSrc": ""
+    },
+    {
+        "name": "Books",
+        "imageSrc": ""
+    },
+    {
+        "name": "Electronics",
+        "imageSrc": ""
+    },
+    {
+        "name": "Entertainment",
+        "imageSrc": ""
+    },
+    {
+        "name": "Beauty",
+        "imageSrc": ""
+    },
+    {
+        "name": "Sports",
+        "imageSrc": ""
+    },
+    {
+        "name": "Appliances",
+        "imageSrc": ""
+    },
+    {
+        "name": "Games",
+        "imageSrc": ""
+    },
+    {
+        "name": "Collectibles",
+        "imageSrc": ""
+    },
+    {
+        "name": "Rentals",
+        "imageSrc": ""
+    },
+    {
+        "name": "Others",
+        "imageSrc": ""
+    }
+]
