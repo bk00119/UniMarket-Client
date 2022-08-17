@@ -8,21 +8,22 @@ import ProfileScreen from "./appRoutes/Profile/ProfileScreen";
 import SearchAndNotification from "../components/Headers/right/SearchAndNotification/mobile";
 import NotificationAndSettings from "../components/Headers/right/NotificationAndSettings/mobile";
 import Options from "../components/Headers/right/Options/mobile";
+import BackButton from "../components/Headers/left/CategoryBackButton/mobile"; //DELETE THE COMPONENT LATER
 
 export default function BottomNavigator(props) {
   const Tab = createBottomTabNavigator();
-
+  
   return (
     <Tab.Navigator
       backBehavior="history"
       initialRouteName="Home"
       screenOptions={{
-        headerStyle: {
-          shadowRadius: 0,
-          shadowOffset: {
-            height: 0,
-          }
-        },
+        // headerStyle: {
+        //   shadowRadius: 0,
+        //   shadowOffset: {
+        //     height: 0,
+        //   }
+        // },
         headerTitleStyle: {
           fontSize: 28,
           marginLeft: 10,
@@ -41,11 +42,11 @@ export default function BottomNavigator(props) {
       />
       <Tab.Screen
         name="Categories"
-        component={CategoriesScreen}
+        children={()=><CategoriesScreen />}
         options={{
           headerRight: () => (
             <SearchAndNotification />
-          ),
+          )
         }}
       />
       <Tab.Screen

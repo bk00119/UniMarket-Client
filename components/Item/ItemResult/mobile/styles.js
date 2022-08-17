@@ -1,20 +1,16 @@
 export const styles = {
     itemResultFilterButton: {
     },
-    itemResultItemCardsContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: '100%',
-        justifyContent: 'space-between',
-        // marginTop: 15
+    itemResultContainer: {
+        marginBottom: 50 //maybe different for Android
+    },
+    itemResultListContainer: {
+        flex: 1,
+        alignItems: 'space-between',
     },
     itemResultItemCardContainer: {
-        width: '50%',
-        marginHorizontal: -5,
         height: 300,
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flex: 0.5,
+        width: '100%',
     }
 };

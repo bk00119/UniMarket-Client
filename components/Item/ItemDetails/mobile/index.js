@@ -2,7 +2,7 @@ import { ScrollView, View, Text, Image } from 'react-native';
 import { Button } from '@rneui/themed';
 
 import { styles } from './styles';
-import { dateDiffInSting } from "../date_difference";
+import { dateDiffInSting } from "../../date_difference";
 
 export default function ItemDetails(props){
     const postDate = new Date(props.itemData.uploadTime);

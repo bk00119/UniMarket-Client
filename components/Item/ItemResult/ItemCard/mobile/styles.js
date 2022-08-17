@@ -1,7 +1,7 @@
 export const styles = {
     itemCardContainer: {
         width: '100%',
-        marginHorizontal: 5,
+        paddingHorizontal: 5,
         marginVertical: 5,
         flex: 1,
         borderRadius: 10

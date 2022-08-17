@@ -7,4 +7,5 @@ const item_url = "https://api.myunimarket.com/items";
 export const createItem = (new_item) => axios.post(`${item_url}/create`, new_item);
 
 //GET
-export const getItemForItemPage = (item_id) => axios.get(`${item_url}/${item_id}`);
+export const getItems = (loadedNumItems) => axios.get(`${item_url}/${loadedNumItems}`);
+export const getItemForItemPage = (item_id) => axios.get(`${item_url}/item/${item_id}`);

@@ -8,8 +8,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SecureStore from 'expo-secure-store';
 
 import Landing from './routes/appRoutes/Landing';
-import BottomNavigator from './routes/BottomNavigator';
-import AppStack from "./routes/appRoutes/AppStack";
+// import BottomNavigator from './routes/BottomNavigator';
+import AppStack from "./routes/AppStack";
 import AuthRoutes from './routes/AuthRoutes';
 import store from './store/store';
 import { theme } from './theme';

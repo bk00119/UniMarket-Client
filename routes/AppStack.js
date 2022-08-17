@@ -1,9 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-import ItemScreen from "./Item/ItemScreen";
-import BottomNavigator from "../BottomNavigator";
-import ShareAndOptions from "../../components/Headers/right/ShareAndOptions/mobile";
+import ItemScreen from "./appRoutes/Item/ItemScreen";
+import CategoryItemResultScreen from './appRoutes/Categories/CategoryItemResult/CategoryItemScreen';
+import BottomNavigator from "./BottomNavigator";
+import ShareAndOptions from "../components/Headers/right/ShareAndOptions/mobile";
 
 export default function AppStack(props){
     const Stack = createStackNavigator();
@@ -25,6 +26,20 @@ export default function AppStack(props){
             <Stack.Screen 
                 name="ItemScreen" 
                 component={ItemScreen}
+                options={{
+                    headerTitle: '',
+                    headerShown: true,
+                    headerStyle: { height: 110 },
+                    headerLeftLabelVisible: false,
+                    headerLeftContainerStyle: { paddingLeft: 10, color: 'black' },
+                    headerRight: () => (
+                        <ShareAndOptions />
+                    ),
+                }}
+            />
+            <Stack.Screen 
+                name="CategoryItemScreen" 
+                component={CategoryItemResultScreen}
                 options={{
                     headerTitle: '',
                     headerShown: true,
