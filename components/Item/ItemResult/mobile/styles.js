@@ -2,7 +2,8 @@ export const styles = {
     itemResultFilterButton: {
     },
     itemResultContainer: {
-        marginBottom: 50 //maybe different for Android
+        marginBottom: 50, //maybe different for Android
+        height: '100%'
     },
     itemResultListContainer: {
         flex: 1,

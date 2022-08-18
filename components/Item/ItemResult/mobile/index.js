@@ -10,26 +10,35 @@ import * as api from '../../../../api/items';
 
 export default function ItemResult(props){
     const navigation = useNavigation();
-    const [selection, setSelection] = useState(0);
     const [loadedNumItems, setLoadedNumItems] = useState(0);
     const [itemList, setItemList] = useState(null);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [sortType, setSortType] = useState(0);
+    const [itemFilter, setItemFilter] = useState({
+        locations: null,
+        minCost: null,
+        maxCost: null,
+        categories: null
+    });
 
     useEffect(()=>{
+        if(props.category && itemFilter.categories==null){
+            itemFilter.categories = [props.category];
+            setItemFilter(itemFilter);
+        }
         if(itemList==null){
             loadItems();
         }
         if(isRefreshing){
-            console.log('refreshing');
             setItemList(null);
             setLoadedNumItems(0);
             loadItems();
             setIsRefreshing(false);
         }
-    },[selection, isRefreshing]);
+    },[sortType, isRefreshing, itemFilter]);
 
     async function loadItems(){
-        const newLoadedItems = await api.getItems(loadedNumItems);
+        const newLoadedItems = await api.getItemsFilter(loadedNumItems, itemFilter, sortType);
         if(itemList==null){
             setItemList(newLoadedItems.data);
             setLoadedNumItems(newLoadedItems.data.length);
@@ -55,7 +64,7 @@ export default function ItemResult(props){
     return(
         <View style={styles.itemResultContainer}>
             { props.itemResultHeaderType === 'home' ? (
-                <ItemResultHomeHeader selection={selection} setSelection={setSelection} />
+                <ItemResultHomeHeader sortType={sortType} setSortType={setSortType} setIsRefreshing={setIsRefreshing} />
             ) : (
                 <ItemResultCategoriesHeader category={props.category} setCategory={props.setCategory} />
             )}
@@ -63,8 +72,6 @@ export default function ItemResult(props){
                 <FlatList
                 onEndReached={()=> {
                     loadItems();
-                    console.log(loadedNumItems);
-                    console.log(itemList.length);
                 }}
                 onRefresh={()=> {
                     setIsRefreshing(true);

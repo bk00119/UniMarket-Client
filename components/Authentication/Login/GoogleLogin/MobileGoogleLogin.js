@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Google from 'expo-auth-session/providers/google';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, Alert } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { Button, Image } from "@rneui/themed";
 
@@ -63,20 +63,22 @@ export default function MobileGoogleLogin(props){
                 googleAccessToken: accessToken,
                 registerDate: new Date()
             });
-            reqUserFromDB(data.id);
+            reqUserFromDB(data.id, data.email);
         });
     }
 
-    async function reqUserFromDB(googleId){
-        
+    async function reqUserFromDB(googleId, email){
         try {
-            await api.getUserByGoogleId(googleId)
+            await api.getUserByGoogleId(googleId, email)
                 .then(async (response)=> {
                     props.setUserData(response.data);
                     saveToSecureStore("loginStatus", response.data._id); //userId, not googleId
                 })
         } catch(error) {
-
+            if(error.response.status==401){
+                console.log("nope");
+                alert("Please use your school account");
+            }
             if(error.response.status==409){
                 props.setRegisterStatus(true);
             }

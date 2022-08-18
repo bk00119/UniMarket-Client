@@ -14,7 +14,7 @@ export default function ItemDetails(props){
             <Text style={styles.itemScreenItemCost}>${(props.itemData.cost/100).toFixed(2)}</Text>
             <View style={styles.itemScreenDetailsTopContainer}>
                 <View style={styles.itemScreenDetailsTopLeftContainer}>
-                    <Text style={styles.itemScreenItemDetailsTopLeftText}>{props.itemData.location}</Text>
+                    <Text style={styles.itemScreenItemDetailsTopLeftText}>{props.itemData.location[0].name}</Text>
                     <Text style={styles.itemScreenItemDetailsTopLeftText}>•</Text>
                     <Text style={styles.itemScreenItemDetailsTopLeftText}>{dateDiffInSting(currDate, postDate)}</Text>
                 </View>
