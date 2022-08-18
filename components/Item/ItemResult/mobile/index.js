@@ -1,4 +1,4 @@
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,85 +6,84 @@ import ItemResultHomeHeader from '../ItemResultHeaders/ItemResultHomeHeader/mobi
 import ItemResultCategoriesHeader from '../ItemResultHeaders/ItemResultCategoriesHeader/mobile';
 import ItemCard from '../ItemCard/mobile';
 import { styles } from './styles';
+import * as api from '../../../../api/items';
 
 export default function ItemResult(props){
     const navigation = useNavigation();
-    const [selection, setSelection] = useState(0);
-    // const [itemList, setItemList] = useState([]); //with API Request
-    const [itemList, setItemList] = useState([
-        {
-            "_id": "1",
-            "title": "ECON-UA 323 TEXTBOOK",
-            "images": [],
-            "cost": 3600, //--> $36.00
-            "location": "Palladium Hall",
-            "uploadTime": "5 hours ago",
-            "category": "Books",
-            "tags": ["Econ", "textbook", "intro"],
-            "description": "Spelling my Econ textbook (Economics principles & practices) for ECON-UA 323 class (prof.Johnson).\n\nIt is in very good condition, no marks, stains, or whatsoever. Get it at a much cheaper price!! The original price is $80 on Amazon (insane!!)",
-            "counts": {
-                "view": 280,
-                "favorites": 39
-            }
-        },
-        {
-            "_id": "2",
-            "title": "IKEA Mini Fridge",
-            "images": [],
-            "cost": "$80",
-            "location": "Weinstein Hall",
-            "uploadTime": "2 days ago"
-        },
-        {
-            "_id": "3",
-            "title": "NYU Leggings",
-            "images": [],
-            "cost": "$20",
-            "location": "Bobst Library",
-            "uploadTime": "1 week ago"
-        },
-        {
-            "_id": "4",
-            "title": "Jacquemus Hat",
-            "images": [],
-            "cost": "$75",
-            "location": "University Hall",
-            "uploadTime": "2 hours ago"
-        },
-        {
-            "_id": "5",
-            "title": "Hodu's Favorite Toy",
-            "images": [],
-            "cost": "$100,000",
-            "location": "Tandon",
-            "uploadTime": "5 minutes ago"
-        },
-    ]); //REMOVE THIS LATER
+    const [loadedNumItems, setLoadedNumItems] = useState(0);
+    const [itemList, setItemList] = useState(null);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [sortType, setSortType] = useState(0);
+    const [itemFilter, setItemFilter] = useState({
+        locations: null,
+        minCost: null,
+        maxCost: null,
+        categories: null
+    });
 
     useEffect(()=>{
-        // API Request for Item Results
-    },[selection]);
+        if(props.category && itemFilter.categories==null){
+            itemFilter.categories = [props.category];
+            setItemFilter(itemFilter);
+        }
+        if(itemList==null){
+            loadItems();
+        }
+        if(isRefreshing){
+            setItemList(null);
+            setLoadedNumItems(0);
+            loadItems();
+            setIsRefreshing(false);
+        }
+    },[sortType, isRefreshing, itemFilter]);
 
+    async function loadItems(){
+        const newLoadedItems = await api.getItemsFilter(loadedNumItems, itemFilter, sortType);
+        if(itemList==null){
+            setItemList(newLoadedItems.data);
+            setLoadedNumItems(newLoadedItems.data.length);
+        } else {
+            setItemList(itemList.concat(newLoadedItems.data));
+            setLoadedNumItems(loadedNumItems+newLoadedItems.data.length);
+        }
+    }
     function itemScreenNavigate(item_id){
         navigation.navigate("ItemScreen", {
             item_id: item_id
         });
     }
 
+    function renderItem(props){
+        return (
+            <TouchableOpacity style={styles.itemResultItemCardContainer} onPress={()=>itemScreenNavigate(props.item._id)} >
+                <ItemCard {...props.item} />
+            </TouchableOpacity>
+        );
+    }
+
     return(
         <View style={styles.itemResultContainer}>
             { props.itemResultHeaderType === 'home' ? (
-                <ItemResultHomeHeader selection={selection} setSelection={setSelection} />
+                <ItemResultHomeHeader sortType={sortType} setSortType={setSortType} setIsRefreshing={setIsRefreshing} />
             ) : (
                 <ItemResultCategoriesHeader category={props.category} setCategory={props.setCategory} />
             )}
-            <ScrollView contentContainerStyle={styles.itemResultItemCardsContainer}>
-                { itemList.map((item, index)=> (
-                    <TouchableOpacity style={styles.itemResultItemCardContainer} onPress={()=>itemScreenNavigate(item._id)} >
-                        <ItemCard key={index} {...item} />
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+            {itemList!=null ? (
+                <FlatList
+                onEndReached={()=> {
+                    loadItems();
+                }}
+                onRefresh={()=> {
+                    setIsRefreshing(true);
+                }}
+                refreshing={isRefreshing}
+                data={itemList ? itemList : []}
+                renderItem={renderItem}
+                numColumns={2}
+                columnWrapperStyle={styles.itemResultListContainer}
+                keyExtractor={item => item.id}
+            />
+            ):null}
         </View>
     );
 }

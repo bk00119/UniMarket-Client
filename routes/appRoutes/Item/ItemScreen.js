@@ -10,8 +10,9 @@ import * as api from "../../../api/items";
 
 export default function ItemScreen(props){
     const [itemData, setItemData] = useState(null);
-    // const item_id = props.route.params.item_id //CURRENT: PASSING IN INDEX, NOT ITEM_ID
-    const item_id = '62fb33de621e5f0e64be44b4'; //REMOVE THIS
+    const item_id = props.route.params.item_id //CURRENT: PASSING IN INDEX, NOT ITEM_ID
+    // console.log(item)
+    // const item_id = '62fb33de621e5f0e64be44b4'; //REMOVE THIS
 
     useEffect(()=>{
         if(itemData==null){

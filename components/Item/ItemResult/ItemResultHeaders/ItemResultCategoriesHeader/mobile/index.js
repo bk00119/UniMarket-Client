@@ -11,7 +11,7 @@ export default function ItemResultCategoriesHeader(props){
                 title={props.category}
                 buttonStyle={styles.itemResultHomeHeaderSelectionButton}
                 titleStyle={styles.itemResultCategoriesHeaderButtonTitle}
-                onPress={()=>props.setCategory(null)}
+                // onPress={()=>props.setCategory(null)}
             />
             <Ionicons style={styles.itemResultFilterButton}name="filter-outline" size={32} color="black" onPress={()=>console.log('SHOW FILTER')} />
         </View>
