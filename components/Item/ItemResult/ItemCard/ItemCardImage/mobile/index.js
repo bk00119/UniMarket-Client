@@ -1,4 +1,5 @@
 import { View, Image } from 'react-native';
+import FastImage from 'react-native-fast-image'; //MAYBE UPDATE TO FASTIMAGE FOR A BETTER PERFORMANCE 
 
 import { styles } from './styles';
 

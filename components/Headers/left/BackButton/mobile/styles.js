@@ -1,5 +1,5 @@
 export const styles = {
-    headerBackButtonContain: {
+    headerBackButtonContainer: {
         marginLeft: 25
     },
     headerBackButton: {

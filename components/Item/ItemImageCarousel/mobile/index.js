@@ -12,23 +12,22 @@ export default function ItemImageCarousel(props) {
 
     useEffect(() => {
         setImageData(props.images);
-        console.log(imageData.length);
     }, []);
 
     const renderImage = ({item, index}, parallaxProps) => {
-    return (
-        <View style={styles.itemImageContainer} key={index} >
-            <ParallaxImage
-                source={{uri: item}}
-                containerStyle={styles.itemImageInnerContainer}
-                style={styles.itemImage}
-                parallaxFactor={0.4}
-                {...parallaxProps}
-            />
-            <View style={styles.itemImagePageNumberContainer}>
-                <Text style={styles.itemImagePageNumber}>{index+1} / {imageData.length}</Text>
+        return (
+            <View style={styles.itemImageContainer} key={index} >
+                <ParallaxImage
+                    source={{uri: item}}
+                    containerStyle={styles.itemImageInnerContainer}
+                    style={styles.itemImage}
+                    parallaxFactor={0.4}
+                    {...parallaxProps}
+                />
+                <View style={styles.itemImagePageNumberContainer}>
+                    <Text style={styles.itemImagePageNumber}>{index+1} / {imageData.length}</Text>
+                </View>
             </View>
-        </View>
         );
     };
 
