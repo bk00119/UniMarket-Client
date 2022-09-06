@@ -2,7 +2,7 @@
   "expo": {
     "name": "Uni Market",
     "slug": "unimarket",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "owner": "unimarket",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
