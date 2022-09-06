@@ -1,6 +1,6 @@
 import { useState, useEffect }from 'react';
 import { View } from 'react-native'
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
 // import { ImageBrowser } from 'expo-image-picker-multiple'; //DOESN'T WORK ON EXPO GO
 // import { MultipleImagePicker } from '@baronha/react-native-multiple-image-picker'; //DOESN'T WORK ON EXPO GO
 

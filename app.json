@@ -2,7 +2,7 @@
   "expo": {
     "name": "Uni Market",
     "slug": "unimarket",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "owner": "unimarket",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,18 +18,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "custom photos permission",
-          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
-
-          "//": "Disables the microphone permission",
-          "microphonePermission": false
-        }
-      ]
-    ],
+    "plugins": [],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.unimarket.unimarket",
@@ -46,6 +35,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a4cec4a2-2093-42dd-8988-70e54cf73212"
+      }
     }
   }
 }
