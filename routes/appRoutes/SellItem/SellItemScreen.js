@@ -1,8 +1,5 @@
 import { useState, useEffect }from 'react';
-import { View } from 'react-native'
-// import * as ImagePicker from 'expo-image-picker';
-// import { ImageBrowser } from 'expo-image-picker-multiple'; //DOESN'T WORK ON EXPO GO
-// import { MultipleImagePicker } from '@baronha/react-native-multiple-image-picker'; //DOESN'T WORK ON EXPO GO
+import { ScrollView } from 'react-native';
 
 import SellItemImageBox from '../../../components/SellItem/ImageBox/mobile';
 import SellItemTextForm from '../../../components/SellItem/ItemTextForm/mobile';
@@ -14,26 +11,29 @@ export default function SellItemScreen(props) {
         tags: '',
         tagsArray: []
     }
-    const [tags, setTags] = useState(initialTags);
+    const [tags, setTags] = useState(initialTags);    
+    // const [category, setCategory] = useState(props.route.params.category ? props.route.params.category : null);
+    const [category, setCategory] = useState(null);
 
     useEffect(()=>{
-      // (async ()=> {
-      //     // const mediaStatus = await ImagePicker.requestCameraPermissionsAsync();
-      //     // setMediaPermission(mediaStatus.status === 'granted');
-      // })();
-      if(props.refresh){
-          //RESET EVERY STATE
-          setImages([]);
-          props.formRef.current.resetForm();
-          setTags(initialTags);
-          props.setRefresh(false);
-      }
-  },[props.refresh])
+        if(props.refresh){
+            //RESET EVERY STATE
+            setImages([]);
+            props.formRef.current.resetForm();
+            setTags(initialTags);
+            props.route.params.category = null;
+            setCategory(null);
+            props.setRefresh(false);
+        }
+        if(props.route.params.category != category){
+            setCategory(props.route.params.category);
+        }
+  },[props.refresh, props.route.params.category])
 
     return (
-        <View style={styles.sellItemScreenContainer} >
+        <ScrollView style={styles.sellItemScreenContainer} >
             <SellItemImageBox formRef={props.formRef} images={images} setImages={setImages} />
-            <SellItemTextForm formRef={props.formRef} tags={tags} setTags={setTags} images={images} setRefresh={props.setRefresh} />
-        </View>
+            <SellItemTextForm formRef={props.formRef} category={category} tags={tags} setTags={setTags} images={images} setRefresh={props.setRefresh} />
+        </ScrollView>
     );
 }

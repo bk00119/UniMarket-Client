@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 
-// import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import { styles } from './styles';
 
@@ -8,12 +8,13 @@ export default function SellItemImageBox(props) {
 
     const pickImage = async () => {
         // //Expo App doesn't work with react-native-image-crop-picker
-        // let result = await ImagePicker.openPicker({
-        //     multiple: true,
-        // });
-        // if (result) {
-        //     props.setImages(result);
-        // }
+        let result = await ImagePicker.openPicker({
+            multiple: true,
+        });
+        if (result) {
+            props.setImages(result);
+            // console.log(result); //sourceURL
+        }
     }
 
     function removeImage(imageIndex){

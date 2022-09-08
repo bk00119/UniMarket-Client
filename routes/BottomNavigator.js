@@ -58,7 +58,7 @@ export default function BottomNavigator(props) {
       <Tab.Screen
         name="Sell"
         // component={SellItemScreen}
-        children={()=><SellItemScreen formRef={formRef} refresh={refresh} setRefresh={setRefresh} />}
+        children={(props)=><SellItemScreen route={props.route} formRef={formRef} refresh={refresh} setRefresh={setRefresh} />}
         options={{
           tabBarStyle: { display : "none" },
           headerTitle: '',

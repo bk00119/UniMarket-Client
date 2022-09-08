@@ -1,12 +1,13 @@
 export const styles = {
     sellItemScreenImageBoxOuterContainer: {
-        height: 130
+        height: 130,
     },
     sellItemScreenImageBoxContainer: {
         display: 'flex',
         flexDirection: 'row',
         // justifyContent: 'space-between'
-        paddingTop: 10
+        paddingTop: 10,
+        marginLeft: 25
     },
     sellItemUploadImageButton: {
         backgroundColor: '#F5F5F5',

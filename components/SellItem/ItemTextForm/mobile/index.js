@@ -1,4 +1,4 @@
-import { View, TextInput, TouchableWithoutFeedback, Keyboard, SafeAreaView } from 'react-native';
+import { View, TextInput, TouchableWithoutFeedback, Keyboard, SafeAreaView, TouchableOpacity, Text, Image } from 'react-native';
 import { Formik } from 'formik';
 import TagInput from 'react-native-tags-input';
 import { useNavigation } from '@react-navigation/native';
@@ -17,7 +17,8 @@ export default function ItemTextForm(props) {
         itemData.price = parseInt(itemData.price*100);
 
         //REMOVE THIS LATER
-        itemData.category = "Books";
+        // itemData.category = "Books";
+        itemData.category = props.category;
         itemData.location = "Bobst Library";
         console.log(itemData);
         //
@@ -27,6 +28,10 @@ export default function ItemTextForm(props) {
 
         props.setRefresh(true);
         navigation.navigate("My");
+    }
+
+    function setCategory() {
+        navigation.navigate('SellItemCategoryScreen');
     }
 
     function updateTag(tag) {
@@ -58,6 +63,7 @@ export default function ItemTextForm(props) {
                                 onBlur={handleBlur('title')}
                                 placeholder="Title"
                                 value={values.title}
+                                placeholderTextColor="#7D7D7D"
                                 // value={props.formRef.current.values.title}
                             />
                             {/* <TextInput
@@ -68,6 +74,25 @@ export default function ItemTextForm(props) {
                                 value={values.category}
                                 type={"number"}
                             /> */}
+                            <TouchableOpacity 
+                                style={styles.sellItemCategoryInputContainer} 
+                                activeOpacity={1} 
+                                onPress={setCategory}
+                            >
+                                {props.category==null ? (
+                                    <Text style={styles.sellItemCategoryInputText}>
+                                        Category
+                                    </Text>
+                                ) : (
+                                    <Text style={styles.sellItemCategoryInputTextBold}>
+                                        {props.category}
+                                    </Text>
+                                )}
+                                <Image
+                                    source={require('../chevron-right.png')}
+                                    style={styles.sellItemCategoryInputIcon}
+                                />
+                            </TouchableOpacity>
                             <TextInput
                                 style={styles.sellItemTextInput}
                                 onChangeText={handleChange('price')}
@@ -75,6 +100,7 @@ export default function ItemTextForm(props) {
                                 placeholder="$ Price"
                                 value={values.price}
                                 keyboardType="numeric"
+                                placeholderTextColor="#7D7D7D"
                             />
                             <TagInput
                                 // updateState={props.setTags}
@@ -85,6 +111,7 @@ export default function ItemTextForm(props) {
                                 inputContainerStyle={styles.sellItemTagsInputContainer}
                                 inputStyle={styles.sellItemTagsInput}
                                 tagStyle={styles.sellItemTags}
+                                placeholderTextColor="#7D7D7D" 
                             />
                             {/* <TextInput
                                 style={styles.sellItemTitleTextInput}
@@ -101,6 +128,7 @@ export default function ItemTextForm(props) {
                                 value={values.description}
                                 multiline = {true}
                                 numberOfLines = {3}
+                                placeholderTextColor="#7D7D7D"
                             />
                         </View>
                     )}
