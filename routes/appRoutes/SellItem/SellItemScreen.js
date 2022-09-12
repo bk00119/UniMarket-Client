@@ -14,6 +14,7 @@ export default function SellItemScreen(props) {
     const [tags, setTags] = useState(initialTags);    
     // const [category, setCategory] = useState(props.route.params.category ? props.route.params.category : null);
     const [category, setCategory] = useState(null);
+    const [location, setLocation] = useState(null);
 
     useEffect(()=>{
         if(props.refresh){
@@ -23,6 +24,8 @@ export default function SellItemScreen(props) {
             setTags(initialTags);
             props.route.params.category = null;
             setCategory(null);
+            props.route.params.location = null;
+            setLocation(null);
             props.setRefresh(false);
         }
         if(props.route.params.category != category){
@@ -33,7 +36,7 @@ export default function SellItemScreen(props) {
     return (
         <ScrollView style={styles.sellItemScreenContainer} >
             <SellItemImageBox formRef={props.formRef} images={images} setImages={setImages} />
-            <SellItemTextForm formRef={props.formRef} category={category} tags={tags} setTags={setTags} images={images} setRefresh={props.setRefresh} />
+            <SellItemTextForm formRef={props.formRef} category={category} tags={tags} location={location} setTags={setTags} images={images} setRefresh={props.setRefresh} />
         </ScrollView>
     );
 }

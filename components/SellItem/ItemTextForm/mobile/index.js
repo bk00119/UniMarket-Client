@@ -34,6 +34,10 @@ export default function ItemTextForm(props) {
         navigation.navigate('SellItemCategoryScreen');
     }
 
+    function setLocation() {
+        navigation.navigate('SellItemLocationScreen');
+    }
+
     function updateTag(tag) {
         if(props.tags.tagsArray.length>2){
             alert("You can only put 3 tags");
@@ -66,14 +70,6 @@ export default function ItemTextForm(props) {
                                 placeholderTextColor="#7D7D7D"
                                 // value={props.formRef.current.values.title}
                             />
-                            {/* <TextInput
-                                style={styles.sellItemTitleTextInput}
-                                onChangeText={handleChange('category')}
-                                onBlur={handleBlur('category')}
-                                placeholder="Category"
-                                value={values.category}
-                                type={"number"}
-                            /> */}
                             <TouchableOpacity 
                                 style={styles.sellItemCategoryInputContainer} 
                                 activeOpacity={1} 
@@ -110,16 +106,29 @@ export default function ItemTextForm(props) {
                                 containerStyle={styles.sellItemTagsContainer}
                                 inputContainerStyle={styles.sellItemTagsInputContainer}
                                 inputStyle={styles.sellItemTagsInput}
+                                tagsViewStyle={styles.sellItemTagsView}
                                 tagStyle={styles.sellItemTags}
                                 placeholderTextColor="#7D7D7D" 
                             />
-                            {/* <TextInput
-                                style={styles.sellItemTitleTextInput}
-                                onChangeText={handleChange('location')}
-                                onBlur={handleBlur('location')}
-                                placeholder="Location"
-                                value={values.location}
-                            /> */}
+                            <TouchableOpacity 
+                                style={styles.sellItemLocationInputContainer} 
+                                activeOpacity={1} 
+                                onPress={setLocation}
+                            >
+                                {props.category==null ? (
+                                    <Text style={styles.sellItemLocationInputText}>
+                                        Where to meet
+                                    </Text>
+                                ) : (
+                                    <Text style={styles.sellItemLocationInputTextBold}>
+                                        {props.category}
+                                    </Text>
+                                )}
+                                <Image
+                                    source={require('../chevron-right.png')}
+                                    style={styles.sellItemLocationInputIcon}
+                                />
+                            </TouchableOpacity>
                             <TextInput
                                 style={styles.sellItemDescriptionTextInput}
                                 onChangeText={handleChange('description')}

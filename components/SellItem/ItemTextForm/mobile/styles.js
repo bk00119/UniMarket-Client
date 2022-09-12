@@ -21,7 +21,7 @@ export const styles = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     sellItemCategoryInputText: {
         fontSize: 18,
@@ -53,6 +53,9 @@ export const styles = {
         borderColor: '#EAEAEA',
         marginRight: -25,
     },
+    sellItemTagsView: {
+        marginTop: 0
+    },
     sellItemTags: {
         backgroundColor: '#F5F5F5',
         borderWidth: 0,
@@ -62,12 +65,34 @@ export const styles = {
         // paddingVertical: 10
         // fontSize: 20
     },
+    sellItemLocationInputContainer: {
+        paddingVertical: 20,
+        // borderBottomWidth: 1,
+        // borderColor: '#EAEAEA',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    sellItemLocationInputText: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#7D7D7D'
+    },
+    sellItemLocationInputTextBold: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#000'
+    },
+    sellItemLocationInputIcon: {
+        width: 20,
+        height: 20,
+    },
     sellItemDescriptionTextInput: {
         borderTopWidth: 10,
         borderColor: '#F5F5F5',
         marginHorizontal: -25,
         paddingHorizontal: 25,
-        marginTop: 10,
         paddingTop: 20,
         marginBottom: 20,
         fontSize: 18,

@@ -5,7 +5,8 @@ import ItemScreen from "./appRoutes/Item/ItemScreen";
 import CategoryItemResultScreen from './appRoutes/Categories/CategoryItemResult/CategoryItemScreen';
 import BottomNavigator from "./BottomNavigator";
 import ShareAndOptions from "../components/Headers/right/ShareAndOptions/mobile";
-import SellItemCategoryScreen from "./appRoutes/SellItem/SellItemCategory.js"
+import SellItemCategoryScreen from "./appRoutes/SellItem/SellItemCategory";
+import SellItemLocationScreen from "./appRoutes/SellItem/SellItemLocation";
 
 export default function AppStack(props){
     const Stack = createStackNavigator();
@@ -57,6 +58,17 @@ export default function AppStack(props){
                 component={SellItemCategoryScreen}
                 options={{
                     headerTitle: 'Choose Category',
+                    headerShown: true,
+                    headerStyle: { height: 110 },
+                    headerLeftLabelVisible: false,
+                    headerLeftContainerStyle: { paddingLeft: 10, color: 'black' },
+                }}
+            />
+            <Stack.Screen 
+                name="SellItemLocationScreen" 
+                component={SellItemLocationScreen}
+                options={{
+                    headerTitle: '',
                     headerShown: true,
                     headerStyle: { height: 110 },
                     headerLeftLabelVisible: false,
