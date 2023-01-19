@@ -27,11 +27,15 @@ export default function SellItemScreen(props) {
             props.route.params.location = null;
             setLocation(null);
             props.setRefresh(false);
+        } else {
+            if(props.route.params.category != category && category == null){
+                setCategory(props.route.params.category);
+            }
+            if(props.route.params.location != location && location == null){
+                setLocation(props.route.params.location);
+            }
         }
-        if(props.route.params.category != category){
-            setCategory(props.route.params.category);
-        }
-  },[props.refresh, props.route.params.category])
+  },[props.refresh, props.route.params.category, props.route.params.location])
 
     return (
         <ScrollView style={styles.sellItemScreenContainer} >

@@ -1,18 +1,30 @@
 import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity, ScrollView } from 'react-native';
 
-// import category_list from "../category.json";
+import location_list from "../nyu_location.json";
 import { styles } from "./styles";
 
 export default function SellItemLocationSelection() {
     const navigation = useNavigation();
 
-    // function categorySelect(category){
-    //     navigation.navigate('Sell', { category: category });
-    // }
+function locationSelect(location){
+        navigation.navigate('Sell', { location: location });
+    }
 
     return (
-        <ScrollView style={styles.sellItemCategoryListContainer}>
+        <ScrollView style={styles.sellItemLocationListContainer}>
+            {location_list.map((location) => (
+                <TouchableOpacity 
+                    key={location} 
+                    style={styles.sellItemLocationListTextContainer}
+                    activeOpacity={1}
+                    onPress={()=>locationSelect(location)}
+                >
+                    <Text style={styles.sellItemLocationListText}>
+                        {location}
+                    </Text>
+                </TouchableOpacity>
+            ))}
         </ScrollView>
     );
 };

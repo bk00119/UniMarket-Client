@@ -15,13 +15,11 @@ export default function ItemTextForm(props) {
         itemData.images = props.images;
         itemData.tags = props.tags.tagsArray;
         itemData.price = parseInt(itemData.price*100);
+        itemData.category = props.category;
+        itemData.location = props.location;
 
         //REMOVE THIS LATER
-        // itemData.category = "Books";
-        itemData.category = props.category;
-        itemData.location = "Bobst Library";
         console.log(itemData);
-        //
 
         //API POST (AWAIT)
         //IMAGE POST (GET IDS) --> ITEM DATA POST
@@ -115,13 +113,13 @@ export default function ItemTextForm(props) {
                                 activeOpacity={1} 
                                 onPress={setLocation}
                             >
-                                {props.category==null ? (
+                                {props.location==null ? (
                                     <Text style={styles.sellItemLocationInputText}>
                                         Where to meet
                                     </Text>
                                 ) : (
                                     <Text style={styles.sellItemLocationInputTextBold}>
-                                        {props.category}
+                                        {props.location}
                                     </Text>
                                 )}
                                 <Image

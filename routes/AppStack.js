@@ -68,7 +68,7 @@ export default function AppStack(props){
                 name="SellItemLocationScreen" 
                 component={SellItemLocationScreen}
                 options={{
-                    headerTitle: '',
+                    headerTitle: 'Choose Location',
                     headerShown: true,
                     headerStyle: { height: 110 },
                     headerLeftLabelVisible: false,
