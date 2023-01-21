@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState, useRef } from 'react';
 
 import HomeScreen from "./appRoutes/Home/HomeScreen";
 import CategoriesScreen from "./appRoutes/Categories/CategoriesScreen";
@@ -8,10 +9,15 @@ import ProfileScreen from "./appRoutes/Profile/ProfileScreen";
 import SearchAndNotification from "../components/Headers/right/SearchAndNotification/mobile";
 import NotificationAndSettings from "../components/Headers/right/NotificationAndSettings/mobile";
 import Options from "../components/Headers/right/Options/mobile";
-import BackButton from "../components/Headers/left/CategoryBackButton/mobile"; //DELETE THE COMPONENT LATER
+// import BackButton from "../components/Headers/left/BackButton/mobile";
+import CloseButton from "../components/Headers/left/CloseButton/mobile";
+import PostButton from "../components/Headers/right/PostButton/mobile";
 
 export default function BottomNavigator(props) {
   const Tab = createBottomTabNavigator();
+  const [refresh, setRefresh] = useState(true);
+
+  var formRef = useRef();
   
   return (
     <Tab.Navigator
@@ -51,7 +57,27 @@ export default function BottomNavigator(props) {
       />
       <Tab.Screen
         name="Sell"
-        component={SellItemScreen}
+        // component={SellItemScreen}
+        children={(props)=><SellItemScreen route={props.route} formRef={formRef} refresh={refresh} setRefresh={setRefresh} />}
+        initialParams={{ category: null, location: null }}
+        options={{
+          tabBarStyle: { display : "none" },
+          headerTitle: '',
+          headerShown: true,
+          headerStyle: { height: 110 },
+          headerStyle: {
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0,
+            }
+          },
+          headerLeft: () => (
+            <CloseButton setRefresh={setRefresh} />
+          ),
+          headerRight: () => (
+            <PostButton formRef={formRef} setRefresh={setRefresh} />
+          )
+        }}
       />
       <Tab.Screen
         name="Chat"
@@ -59,7 +85,7 @@ export default function BottomNavigator(props) {
         options={{
           headerRight: () => (
             <Options />
-          ),
+          )
         }}
       />
       <Tab.Screen

@@ -81,7 +81,6 @@ export default function ItemResult(props){
                 renderItem={renderItem}
                 numColumns={2}
                 columnWrapperStyle={styles.itemResultListContainer}
-                keyExtractor={item => item.id}
             />
             ):null}
         </View>

@@ -1,17 +1,46 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native'
+import { useState, useEffect }from 'react';
+import { ScrollView } from 'react-native';
+
+import SellItemImageBox from '../../../components/SellItem/ImageBox/mobile';
+import SellItemTextForm from '../../../components/SellItem/ItemTextForm/mobile';
+import { styles } from './styles';
 
 export default function SellItemScreen(props) {
+    const [images, setImages] = useState([]);
+    const initialTags = {
+        tags: '',
+        tagsArray: []
+    }
+    const [tags, setTags] = useState(initialTags);    
+    // const [category, setCategory] = useState(props.route.params.category ? props.route.params.category : null);
+    const [category, setCategory] = useState(null);
+    const [location, setLocation] = useState(null);
+
+    useEffect(()=>{
+        if(props.refresh){
+            //RESET EVERY STATE
+            setImages([]);
+            props.formRef.current.resetForm();
+            setTags(initialTags);
+            props.route.params.category = null;
+            setCategory(null);
+            props.route.params.location = null;
+            setLocation(null);
+            props.setRefresh(false);
+        } else {
+            if(props.route.params.category != category && category == null){
+                setCategory(props.route.params.category);
+            }
+            if(props.route.params.location != location && location == null){
+                setLocation(props.route.params.location);
+            }
+        }
+  },[props.refresh, props.route.params.category, props.route.params.location])
+
     return (
-        <View  style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
-            <Text>PostScreen</Text>
-            {/* <Button title="go home" onPress={()=>props.navigation.navigate('Home')} /> */}
-            <Button
-        title="Go to Details... again"
-        onPress={() => props.navigation.navigate('Post')}
-      />
-      <Button title="Go to Home" onPress={() => props.navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => props.navigation.goBack()} />
-        </View>
+        <ScrollView style={styles.sellItemScreenContainer} >
+            <SellItemImageBox formRef={props.formRef} images={images} setImages={setImages} />
+            <SellItemTextForm formRef={props.formRef} category={category} tags={tags} location={location} setTags={setTags} images={images} setRefresh={props.setRefresh} />
+        </ScrollView>
     );
 }
