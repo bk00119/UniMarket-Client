@@ -6,19 +6,25 @@ import ItemResult from '../../../components/Item/ItemResult/mobile';
 import category_list from './categories.json';
 import { styles } from './styles';
 
-export default function CategoriesScreen() {
-    const [categoryType, setCategoryType] =  useState(null);
+export default function CategoriesScreen(props) {
+    // const [categoryType, setCategoryType] =  useState(null);
 
     const navigation = useNavigation();
     function categoryScreenNavigate(category){
-        navigation.navigate("CategoryItemScreen", {
-            category: category
-        });
+        // console.log(category);
+        // setCategoryType(category);
+        props.setCategory(category);
+        // console.log(categoryType);
+        // navigation.navigate("CategoryItemTab", { 
+        //     category: category
+        // });
+
+        // navigation.navigate('CategoryItemScreen', { category: category });
     }
 
     return (
         <View style={styles.categoriesScreenContainer}>
-            { categoryType==null ? (
+            { props.category == null ? (
                 <View style={styles.categoriesContainer}>
                     { category_list.map((category, index)=> (
                         <View style={styles.categoryContainer} key={index}>
@@ -34,8 +40,22 @@ export default function CategoriesScreen() {
                     ))}
                 </View>
             ) : (
-                <ItemResult itemResultHeaderType='categories' category={categoryType} setCategory={setCategoryType} />
+                <ItemResult itemResultHeaderType='categories' category={props.category} setCategory={props.setCategory} />
             )}
+            {/* <View style={styles.categoriesContainer}>
+                    { category_list.map((category, index)=> (
+                        <View style={styles.categoryContainer} key={index}>
+                            <View style={styles.categoryInnerContainer} >
+                                <TouchableOpacity 
+                                    style={styles.categoryImage}
+                                    onPress={()=>categoryScreenNavigate(category.name)}
+                                >
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.categoryName}>{category.name}</Text>
+                        </View>
+                    ))}
+                </View> */}
         </View>
     );
 }

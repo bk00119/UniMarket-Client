@@ -22,6 +22,7 @@ export default function ItemResult(props){
     });
 
     useEffect(()=>{
+        console.log(props)
         if(props.category && itemFilter.categories==null){
             itemFilter.categories = [props.category];
             setItemFilter(itemFilter);

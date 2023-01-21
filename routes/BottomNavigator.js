@@ -12,10 +12,12 @@ import Options from "../components/Headers/right/Options/mobile";
 // import BackButton from "../components/Headers/left/BackButton/mobile";
 import CloseButton from "../components/Headers/left/CloseButton/mobile";
 import PostButton from "../components/Headers/right/PostButton/mobile";
+import ResetCategoryButton from "../components/Headers/left/ResetCategoryButton/mobile";
 
 export default function BottomNavigator(props) {
   const Tab = createBottomTabNavigator();
   const [refresh, setRefresh] = useState(true);
+  const [category, setCategory] = useState(null);
 
   var formRef = useRef();
   
@@ -48,13 +50,18 @@ export default function BottomNavigator(props) {
       />
       <Tab.Screen
         name="Categories"
-        children={()=><CategoriesScreen />}
+        children={()=><CategoriesScreen category={category} setCategory={setCategory}/>}
         options={{
           headerRight: () => (
             <SearchAndNotification />
-          )
+          ),
+          headerLeft: () => ( 
+            category!=null ? <ResetCategoryButton setCategory={setCategory} /> : null
+          ),
+          headerTitle: ''
         }}
       />
+
       <Tab.Screen
         name="Sell"
         // component={SellItemScreen}
